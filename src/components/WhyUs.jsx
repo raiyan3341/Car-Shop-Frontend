@@ -4,12 +4,11 @@ import { FaCalendarCheck, FaTags, FaShieldAlt, FaHeadset } from 'react-icons/fa'
 const WhyUsCard = ({ icon, title, description }) => (
     <div className="p-6 bg-base-100 transition transform hover:scale-112 duration-500 border border-primary/20 
              shadow-2xl shadow-green-500/60 hover:shadow-2xl hover:shadow-green-500/90 rounded-2xl">
-        <div className="text-4xl text-primary mb-4">{icon}</div>
+        <div className="text-4xl text-primary mb-5">{icon}</div>
         <h3 className="text-xl font-bold mb-3 text-gray-800">{title}</h3>
         <p className="text-gray-500">{description}</p>
     </div>
 );
-
 const WhyUs = () => {
     const benefits = [
         { icon: <FaCalendarCheck />, title: "Easy Booking", description: "Book your favorite car seamlessly online in just a few clicks." },
