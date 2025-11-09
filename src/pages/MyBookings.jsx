@@ -1,5 +1,3 @@
-// src/pages/MyBookings/MyBookings.jsx
-
 import React, { useEffect, useState } from 'react';
 import useAxios from '../hooks/useAxios';
 import useAuth from '../hooks/useAuth';
@@ -15,7 +13,6 @@ const MyBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Fetch Bookings
     useEffect(() => {
         if (user?.email) {
             setLoading(true);
@@ -32,8 +29,7 @@ const MyBookings = () => {
         }
     }, [user, axiosSecure]);
     
-    // --- NEW: Handle Cancellation Logic ---
-    const handleCancelBooking = (bookingId, carName) => {
+    const handleCancelBooking = (bookingId, carName) =>{
         Swal.fire({
             title: `Confirm Cancellation?`,
             text: `Do you want to cancel the booking for ${carName}? The car will become available immediately.`,
@@ -43,15 +39,12 @@ const MyBookings = () => {
             cancelButtonColor: '#3085d6',
             confirmButtonText: 'Yes, cancel it!'
         }).then(async (result) => {
-            if (result.isConfirmed) {
+            if (result.isConfirmed){
                 try {
-                    // Call the new DELETE API route
                     const res = await axiosSecure.delete(`/booking/${bookingId}`); 
 
                     if (res.data.success) {
                         toast.success(`Booking for ${carName} has been cancelled. Car is now Available.`);
-                        
-                        // Remove the cancelled booking from the UI state
                         setBookings(prevBookings => prevBookings.filter(b => b._id !== bookingId));
                     }
                 } catch (error) {
@@ -61,7 +54,6 @@ const MyBookings = () => {
             }
         });
     };
-    // ------------------------------------
 
     if (loading || authLoading) {
         return (
@@ -70,7 +62,6 @@ const MyBookings = () => {
             </div>
         );
     }
-    
     if (bookings.length === 0) {
         return (
             <div className='min-h-[calc(100vh-300px)] flex justify-center items-center'>
@@ -84,10 +75,7 @@ const MyBookings = () => {
             <Helmet>
                 <title>My Bookings - Car Rental</title>
             </Helmet>
-            <h1 className="text-3xl font-extrabold text-green-500 text-center mb-10">
-                My Booked Cars ({bookings.length})
-            </h1>
-            
+            <h1 className="text-3xl font-extrabold text-green-500 text-center mb-10">My Booked Cars ({bookings.length})</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {bookings.map(booking => (
                     <div key={booking._id} className="card bg-white shadow-2xl shadow-blue-600/90 border border-primary/10 transition duration-300 hover:shadow-xl">
@@ -95,8 +83,7 @@ const MyBookings = () => {
                             <img 
                                 src={booking.carDetails?.hostedImageURL || 'https://via.placeholder.com/600x400?text=Car+Image'} 
                                 alt={booking.carDetails?.carName || 'Booked Car'} 
-                                className='h-52 w-full object-cover'
-                            />
+                                className='h-52 w-full object-cover'/>
                         </figure>
                         <div className="card-body p-5">
                             <h2 className="card-title text-xl font-bold text-primary">
@@ -116,9 +103,7 @@ const MyBookings = () => {
                             <div className="card-actions justify-end mt-4">
                                 <button 
                                     onClick={() => handleCancelBooking(booking._id, booking.carDetails?.carName || 'This Car')} 
-                                    className="btn btn-error btn-sm text-white hover:bg-red-700 transition duration-200"
-                                >
-                                    Cancel Booking
+                                    className="btn btn-error btn-sm text-white hover:bg-red-700 transition duration-200">Cancel Booking
                                 </button>
                             </div>
                         </div>

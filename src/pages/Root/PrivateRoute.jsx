@@ -1,12 +1,11 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { ScaleLoader } from "react-spinners"; // Loading Spinner Requirement
+import { ScaleLoader } from "react-spinners";
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth();
     const location = useLocation();
 
-    // Loading Spinner Display (Requirement)
     if (loading) {
         return (
             <div className="flex justify-center items-center h-[80vh]">
@@ -15,12 +14,9 @@ const PrivateRoute = ({ children }) => {
         );
     }
 
-    // Redirect to Login if no user is found
     if (user) {
         return children;
     }
-
-    // Pass the current path to the state so the user can be redirected back after login
     return <Navigate state={location.pathname} to="/login" replace />;
 };
 

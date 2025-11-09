@@ -53,8 +53,7 @@ const Home = () => {
                 {!searchQuery && (
                     <AnimatedSection delay={0.2}>
                         <div className="text-center mt-12">
-                            <Link 
-                                to="/browse" className="btn btn-primary hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-xl transition duration-300">Show More Cars</Link>
+                            <Link to="/browse" className="btn btn-primary hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-xl transition duration-300">Show More Cars</Link>
                         </div>
                     </AnimatedSection>
                 )}

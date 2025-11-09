@@ -20,7 +20,7 @@ const useAxios = () => {
         return response;
     }, async (error) => {
         const status = error.response?.status;
-        if (status === 401 || status === 403) {
+        if (status === 401 || status === 403){
             console.log('Authorization error detected, attempting logout...');
         }
         return Promise.reject(error);

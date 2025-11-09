@@ -5,7 +5,7 @@ import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { ScaleLoader } from 'react-spinners';
 import { FaDollarSign, FaMapMarkerAlt, FaUser, FaEnvelope, FaCalendarCheck } from 'react-icons/fa';
-import BookingConfirmationModal from '../components/BookingConfirmationModal'; // Will be created next
+import BookingConfirmationModal from '../components/BookingConfirmationModal';
 
 const CarDetails = () => {
     const { id } = useParams();
@@ -17,7 +17,6 @@ const CarDetails = () => {
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     
-    // --- 1. Fetch Single Car Data ---
     useEffect(() => {
         setLoading(true);
         axiosSecure.get(`/cars/${id}`)
@@ -34,17 +33,13 @@ const CarDetails = () => {
             });
     }, [id, axiosSecure, navigate]);
 
-    // --- 2. Handle Booking (Booking Management Challenge) ---
     const handleBookNow = () => {
         if (car.status !== 'Available') {
             return toast.error("This car is already booked and unavailable.");
         }
-        
-        // Prevent booking own car (Good UX practice)
         if (user.email === car.providerEmail) {
             return toast.error("You cannot book your own car listing.");
         }
-        
         setIsModalOpen(true);
     };
     
@@ -52,18 +47,16 @@ const CarDetails = () => {
         const bookingData = {
             carId: car._id,
             carName: car.carName,
-            userEmail: user.email, // Logged in user's email
-            userName: user.displayName, // Logged in user's name
+            userEmail: user.email, 
+            userName: user.displayName,
             rentPrice: car.rentPrice,
-            // You might add date range selection in a more complex version
         };
         
         try {
             const res = await axiosSecure.post('/book', bookingData);
-            
             if (res.data.success) {
-                toast.success('Booking Confirmed! Enjoy your ride.'); // Show confirmation toast (Requirement)
-                setCar(prev => ({ ...prev, status: 'Booked' })); // Update UI status instantly
+                toast.success('Booking Confirmed! Enjoy your ride.');
+                setCar(prev => ({ ...prev, status: 'Booked' }));
                 setIsModalOpen(false);
             }
         } catch (error) {
@@ -73,7 +66,6 @@ const CarDetails = () => {
         }
     };
 
-
     if (loading) {
         return (
             <div className="flex justify-center items-center h-[80vh]">
@@ -82,8 +74,7 @@ const CarDetails = () => {
         );
     }
     
-    if (!car) return null; // Should be handled by navigation above
-
+    if (!car) return null;
     const isAvailable = car.status === 'Available';
     const statusColor = isAvailable ? 'bg-green-500' : 'bg-red-500';
 
@@ -92,8 +83,6 @@ const CarDetails = () => {
             <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl shadow-blue-600/90 overflow-hidden">
                 <div className="relative h-96">
                     <img src={car.hostedImageURL} alt={car.carName} className="w-full h-full object-cover" />
-                    
-                    {/* Status Badge (Requirement) */}
                     <div className={`absolute top-4 right-4 px-4 py-2 text-lg font-bold text-white rounded-full shadow-lg ${statusColor}`}>
                         {car.status}
                     </div>
@@ -110,29 +99,21 @@ const CarDetails = () => {
                         </span>
                     </div>
 
-                    <p className="text-gray-700 mb-8 leading-relaxed border-b pb-6">
-                        {car.description}
-                    </p>
-
-                    {/* Provider Info */}
+                    <p className="text-gray-700 mb-8 leading-relaxed border-b pb-6">{car.description}</p>
                     <h2 className="text-2xl font-bold text-gray-800 mb-4">Provider Information</h2>
                     <div className="space-y-2 mb-8">
                         <p className="flex items-center text-gray-600">
                             <FaUser className="mr-2 text-primary" /> 
                             <span className='font-semibold'>{car.providerName}</span>
                         </p>
-                        <p className="flex items-center text-gray-600">
-                            <FaEnvelope className="mr-2 text-primary" /> {car.providerEmail}
-                        </p>
+                        <p className="flex items-center text-gray-600"><FaEnvelope className="mr-2 text-primary" /> {car.providerEmail}</p>
                     </div>
                     
-                    {/* Booking Button */}
                     <div className="mt-8">
                         <button 
                             onClick={handleBookNow} 
                             className="btn btn-primary btn-lg w-full"
-                            disabled={!isAvailable || user.email === car.providerEmail} // Disable if booked or if owner
-                        >
+                            disabled={!isAvailable || user.email === car.providerEmail}>
                             <FaCalendarCheck className="text-xl mr-2" /> 
                             {car.status === 'Booked' ? 'Unavailable' : (user.email === car.providerEmail ? 'Your Listing' : 'Book Now')}
                         </button>
@@ -140,8 +121,7 @@ const CarDetails = () => {
                     </div>
                 </div>
             </div>
-            
-            {/* Booking Confirmation Modal */}
+        
             <BookingConfirmationModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}

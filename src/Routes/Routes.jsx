@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from '../pages/Root/Root';
-import ErrorPage from '../pages/ErrorPage/ErrorPage'; // 404 Page (Requirement)
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -10,7 +10,6 @@ import MyBookings from "../pages/MyBookings";
 import BrowseCars from "../pages/BrowseCars";
 import CarDetails from "../pages/CarDetails";
 import PrivateRoute from "../pages/Root/PrivateRoute";
- // Import PrivateRoute
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +23,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/browse",
-        element: <BrowseCars />, // Public Route
+        element: <BrowseCars />,
       },
       {
         path: "/login",
@@ -36,27 +35,24 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-car",
-        element: <PrivateRoute><AddCar /></PrivateRoute>, // Private Route (Requirement)
+        element: <PrivateRoute><AddCar /></PrivateRoute>,
       },
       {
         path: "/my-listings",
-        element: <PrivateRoute><MyListings /></PrivateRoute>, // Private Route (Requirement)
+        element: <PrivateRoute><MyListings /></PrivateRoute>,
       },
       {
         path: "/my-bookings",
-        element: <PrivateRoute><MyBookings /></PrivateRoute>, // Private Route (Requirement)
+        element: <PrivateRoute><MyBookings /></PrivateRoute>,
       },
       {
         path: "/car/:id",
-        // Note: Car Details is specified as Private Route
         element: <PrivateRoute><CarDetails /></PrivateRoute>, 
       },
-      // Optional: Update Car route, often handled via modal on MyListings, but included for completeness
       {
         path: "/update-car/:id",
         element: <PrivateRoute><AddCar isUpdate={true} /></PrivateRoute> 
       }
     ]
   },
-  // Note: The ErrorPage is already defined as the errorElement of the root route.
 ]);

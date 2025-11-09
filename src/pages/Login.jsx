@@ -59,8 +59,7 @@ const Login = () => {
                     </div>
                     
                     <button
-                        type="submit"
-                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" >Sign in
+                        type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" >Sign in
                     </button>
                 </form>
 
@@ -77,9 +76,7 @@ const Login = () => {
                 </button>
 
                 <div className="text-sm text-center">Don't have an account? 
-                    <Link to="/register" className="font-medium text-primary hover:text-primary-dark ml-1">
-                        Register here
-                    </Link>
+                    <Link to="/register" className="font-medium text-primary hover:text-primary-dark ml-1">Register here</Link>
                 </div>
             </div>
         </div>

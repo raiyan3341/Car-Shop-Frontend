@@ -20,9 +20,7 @@ const TestimonialCard = ({ quote, name, car }) => (
 const Testimonials = () => {
     return (
         <section className="bg-white py-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-center text-green-500 mb-12">
-                What Our Customers Say
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-center text-green-500 mb-12"> What Our Customers Say </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {testimonials.map((t, index) => (
                     <TestimonialCard key={index} {...t} />
