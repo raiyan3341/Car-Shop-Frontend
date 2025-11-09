@@ -6,13 +6,10 @@ import toast from 'react-hot-toast';
 const Navbar = () => {
     const { user, logOut, loading } = useAuth();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    // Navigation Links (Requirement)
     const navLinks = (
         <>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/browse">Browse Cars</NavLink></li>
-            {/* Private Routes are conditional only for display here, protection is via PrivateRoute component */}
             {user && (
                 <>
                     <li><NavLink to="/add-car">Add Car</NavLink></li>
@@ -23,12 +20,11 @@ const Navbar = () => {
         </>
     );
     
-    // Handle Logout
     const handleLogout = () => {
         logOut()
             .then(() => {
                 toast.success('Successfully Logged Out!');
-                setIsDropdownOpen(false); // Close dropdown after logout
+                setIsDropdownOpen(false);
             })
             .catch(error => {
                 console.error(error);
@@ -39,7 +35,6 @@ const Navbar = () => {
     return (
         <header className="shadow-lg shadow-blue-400 bg-white sticky top-0 z-50">
             <div className="navbar container mx-auto px-4">
-                {/* Mobile Menu / Logo */}
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -49,34 +44,20 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <Link to="/" className="text-xl font-bold text-primary">
-                        🚗 CarRentalsPro
-                    </Link>
+                    <Link to="/" className="text-xl font-bold text-primary">🚗 CarRentalsPro</Link>
                 </div>
-                
-                {/* Desktop Links */}
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        {navLinks}
-                    </ul>
+                    <ul className="menu menu-horizontal px-1">{navLinks}</ul>
                 </div>
-
-                {/* Login / User Profile */}
                 <div className="navbar-end">
                     {loading ? (
                         <span className="loading loading-spinner loading-sm"></span>
                     ) : user ? (
                         <div className="relative">
                             <div className=''>
-                                <img
-                                src={user.photoURL || 'default_profile.png'} 
-                                alt={user.displayName || 'User'}
-                                className="w-10 h-10 rounded-full cursor-pointer border-2 border-primary object-cover"
-                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                            />
+                                <img src={user.photoURL || 'default_profile.png'}  alt={user.displayName || 'User'} className="w-10 h-10 rounded-full cursor-pointer border-2 border-primary object-cover"
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}/>
                             </div>
-                            
-                            {/* Dropdown Menu (Requirement) */}
                             {isDropdownOpen && (
                                 <ul className="absolute right-0 mt-3 w-80 h-40 p-2 shadow-2xl shadow-blue-600/90 bg-base-100 rounded-box z-50 text-sm">
                                     <li className="p-2 font-bold">{user.displayName || 'User'}</li>
@@ -87,9 +68,7 @@ const Navbar = () => {
                             )}
                         </div>
                     ) : (
-                        <Link to="/login" className="btn btn-primary">
-                            Login / Signup
-                        </Link>
+                        <Link to="/login" className="btn btn-primary">Login / Signup</Link>
                     )}
                 </div>
             </div>
