@@ -4,12 +4,10 @@ import useAuth from '../hooks/useAuth';
 import useAxios from '../hooks/useAxios';
 import toast from 'react-hot-toast';
 import { ScaleLoader } from 'react-spinners';
-
-// Use a single component for both Add and Update operations
 const AddCar = ({ isUpdate = false }) => {
     const { user } = useAuth();
     const axiosSecure = useAxios();
-    const { id } = useParams(); // For update operation
+    const { id } = useParams(); 
     const navigate = useNavigate();
     
     const [carData, setCarData] = useState({
@@ -19,21 +17,16 @@ const AddCar = ({ isUpdate = false }) => {
         rentPrice: '',
         location: '',
         hostedImageURL: '',
-        providerName: user.displayName || '', // Read-only from Auth (Requirement)
-        providerEmail: user.email || '', // Read-only from Auth (Requirement)
+        providerName: user.displayName || '',
+        providerEmail: user.email || '',
     });
     const [loading, setLoading] = useState(false);
-    
-    // Car Category Options (Dropdown Requirement)
     const categories = ['Sedan', 'SUV', 'Hatchback', 'Luxury', 'Electric'];
-
-    // --- Fetch Car Data for Update ---
     useEffect(() => {
         if (isUpdate && id) {
             setLoading(true);
             axiosSecure.get(`/cars/${id}`)
                 .then(res => {
-                    // Fill form with existing data
                     const fetchedCar = res.data;
                     setCarData({
                         carName: fetchedCar.carName,
@@ -57,29 +50,26 @@ const AddCar = ({ isUpdate = false }) => {
         }
     }, [isUpdate, id, axiosSecure, navigate]);
 
-
-    // --- Form Submission Handler ---
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         
         const finalData = { 
             ...carData, 
-            rentPrice: parseFloat(carData.rentPrice) // Ensure price is a number
+            rentPrice: parseFloat(carData.rentPrice)
         };
         
         try {
             if (isUpdate) {
-                // PATCH request for Update Car
                 await axiosSecure.patch(`/cars/${id}`, finalData);
                 toast.success('Car Listing Updated Successfully!');
                 navigate('/my-listings');
-            } else {
-                // POST request for Add Car
+            } 
+            else {
                 await axiosSecure.post('/cars', finalData);
                 toast.success('Car Added Successfully!');
-                e.target.reset(); // Clear form after successful submission
-                setCarData(prev => ({...prev, carName: '', description: '', rentPrice: '', location: '', hostedImageURL: ''})) // Reset form state
+                e.target.reset();
+                setCarData(prev => ({...prev, carName: '', description: '', rentPrice: '', location: '', hostedImageURL: ''}))
             }
         } catch (error) {
             console.error(`${isUpdate ? 'Update' : 'Add'} failed:`, error.response?.data?.message || error.message);
@@ -89,7 +79,7 @@ const AddCar = ({ isUpdate = false }) => {
         }
     };
     
-    if (loading && isUpdate) { // Show loading only for update fetch
+    if (loading && isUpdate) {
         return (
             <div className="flex justify-center items-center h-[80vh]">
                 <ScaleLoader color="#36d7b7" />
@@ -98,14 +88,10 @@ const AddCar = ({ isUpdate = false }) => {
     }
     
     const pageTitle = isUpdate ? 'Update Car Listing' : 'Add New Car';
-
     return (
         <div className="container mx-auto px-4 py-12">
             <h1 className="text-3xl font-extrabold text-green-500 text-center mb-10">{pageTitle}</h1>
-
             <form onSubmit={handleSubmit} className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-2xl shadow-blue-600/90 ">
-                
-                {/* Provider Info (Read-only Requirement) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label className="label font-semibold text-gray-700">Provider Name (Read Only)</label>
@@ -118,7 +104,6 @@ const AddCar = ({ isUpdate = false }) => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Car Name */}
                     <div>
                         <label className="label font-semibold text-gray-700">Car Name</label>
                         <input 
@@ -127,24 +112,20 @@ const AddCar = ({ isUpdate = false }) => {
                             required 
                             value={carData.carName}
                             onChange={(e) => setCarData({...carData, carName: e.target.value})}
-                            className="input input-bordered w-full"
-                        />
+                            className="input input-bordered w-full"/>
                     </div>
-                    {/* Category */}
                     <div>
                         <label className="label font-semibold text-gray-700">Category</label>
                         <select 
                             required
                             value={carData.category}
                             onChange={(e) => setCarData({...carData, category: e.target.value})}
-                            className="select select-bordered w-full"
-                        >
+                            className="select select-bordered w-full">
                             {categories.map(cat => (
                                 <option key={cat} value={cat}>{cat}</option>
                             ))}
                         </select>
                     </div>
-                    {/* Rent Price */}
                     <div>
                         <label className="label font-semibold text-gray-700">Rent Price (Per Day)</label>
                         <input 
@@ -154,10 +135,8 @@ const AddCar = ({ isUpdate = false }) => {
                             min="1"
                             value={carData.rentPrice}
                             onChange={(e) => setCarData({...carData, rentPrice: e.target.value})}
-                            className="input input-bordered w-full"
-                        />
+                            className="input input-bordered w-full"/>
                     </div>
-                    {/* Location */}
                     <div>
                         <label className="label font-semibold text-gray-700">Location</label>
                         <input 
@@ -166,12 +145,9 @@ const AddCar = ({ isUpdate = false }) => {
                             required 
                             value={carData.location}
                             onChange={(e) => setCarData({...carData, location: e.target.value})}
-                            className="input input-bordered w-full"
-                        />
+                            className="input input-bordered w-full"/>
                     </div>
                 </div>
-                
-                {/* Hosted Image URL */}
                 <div className="mt-6">
                     <label className="label font-semibold text-gray-700">Hosted Image URL</label>
                     <input 
@@ -180,11 +156,9 @@ const AddCar = ({ isUpdate = false }) => {
                         required 
                         value={carData.hostedImageURL}
                         onChange={(e) => setCarData({...carData, hostedImageURL: e.target.value})}
-                        className="input input-bordered w-full"
-                    />
+                        className="input input-bordered w-full"/>
                 </div>
-                
-                {/* Description */}
+            
                 <div className="mt-6">
                     <label className="label font-semibold text-gray-700">Description</label>
                     <textarea 
@@ -192,10 +166,9 @@ const AddCar = ({ isUpdate = false }) => {
                         required 
                         value={carData.description}
                         onChange={(e) => setCarData({...carData, description: e.target.value})}
-                        className="textarea textarea-bordered w-full h-32"
-                    ></textarea>
+                        className="textarea textarea-bordered w-full h-32">
+                        </textarea>
                 </div>
-
                 <button type="submit" className="btn btn-primary w-full mt-8" disabled={loading}>
                     {loading ? <span className="loading loading-spinner"></span> : (isUpdate ? 'Save Changes' : 'Add Car')}
                 </button>
