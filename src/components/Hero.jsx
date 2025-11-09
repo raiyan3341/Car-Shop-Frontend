@@ -1,22 +1,32 @@
+// Hero.jsx
+
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import { FaSearch } from 'react-icons/fa';
+
+// ✅ আপনার ছবিগুলো ইম্পোর্ট করুন (ফাইল পাথ আপনার প্রজেক্ট অনুযায়ী সেট করুন)
+import slideImage1 from '../assets/1000_F_647492977_BqqDnIZdRjA3jLCWl8WPGO3Eb8B6HYy1.jpg'; 
+import slideImage2 from '../assets/1000_F_650496188_zQs58xDQwXilm23Al5UVAwkiH6jG5z7L.jpg'; 
+import slideImage3 from '../assets/1000_F_910998153_tOayMd30RZjpx2kzh9baGdcLBDXwMj00.jpg'; 
 
 const slides = [
     {
         title: "Drive Your Dreams Today",
         subtitle: "Unbeatable deals on luxury cars.",
-        image: "https://i.ibb.co/L50nLdM/hero-slide-1.jpg" // Replace with real image links
+        // ✅ এখানে ইম্পোর্ট করা ভেরিয়েবল ব্যবহার করুন
+        image: slideImage1 
     },
     {
         title: "Easy Booking, Fast Pickup",
         subtitle: "Rent a car in just 3 minutes.",
-        image: "https://i.ibb.co/hK70R3x/hero-slide-2.jpg"
+        // ✅ এখানে ইম্পোর্ট করা ভেরিয়েবল ব্যবহার করুন
+        image: slideImage2
     },
     {
         title: "Trusted Providers, 24/7 Support",
         subtitle: "The safest way to travel.",
-        image: "https://i.ibb.co/P44qSgP/hero-slide-3.jpg"
+        // ✅ এখানে ইম্পোর্ট করা ভেরিয়েবল ব্যবহার করুন
+        image: slideImage3
     },
 ];
 
@@ -32,9 +42,10 @@ const Hero = ({ setSearchQuery }) => {
         <div className="carousel w-full h-[60vh] md:h-[80vh] relative">
             {slides.map((slide, index) => (
                 <div id={`slide${index + 1}`} key={index} className="carousel-item relative w-full">
-                    <img src={slide.image} className="w-full object-cover" alt={slide.title} />
-                    <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-center p-4">
-                        <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
+                    {/* slide.image এখন আর স্ট্রিং নয়, এটি সরাসরি ছবির ফাইল পাথ */}
+                    <img src={slide.image} className="w-full object-cover" alt={slide.title} /> 
+                    <div className="absolute inset-0  bg-opacity-60 flex flex-col justify-center items-center text-center p-4">
+                        <h1 className="text-4xl md:text-6xl font-extrabold text-green-500 mb-4">
                             <Typewriter
                                 words={[slide.title]}
                                 loop={1}
@@ -54,7 +65,7 @@ const Hero = ({ setSearchQuery }) => {
                                     type="text" 
                                     name="search"
                                     placeholder="Search cars by name..." 
-                                    className="p-4 w-full text-lg text-gray-900 border-none focus:outline-none"
+                                    className="p-4 w-full text-lg text-white border focus:bg-amber-50 focus:text-black"
                                     required
                                 />
                                 <button type="submit" className="bg-primary hover:bg-primary-dark text-white p-4 flex items-center justify-center">

@@ -54,8 +54,8 @@ const UpdateCarModal = ({ isOpen, onClose, car }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[100]">
-            <div className="bg-white p-6 rounded-lg w-full max-w-xl mx-4 shadow-2xl">
+        <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-[100]">
+            <div className="bg-white p-6 rounded-lg w-full max-w-xl mx-4 shadow-2xl shadow-green-600/90">
                 <h2 className="text-2xl font-bold mb-4 border-b pb-2">Update Car: {car.carName}</h2>
                 <form onSubmit={handleUpdateSubmit}>
                     

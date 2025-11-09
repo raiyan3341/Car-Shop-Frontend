@@ -8,7 +8,8 @@ const testimonials = [
 ];
 
 const TestimonialCard = ({ quote, name, car }) => (
-    <div className="p-8 bg-gray-100 rounded-xl shadow-lg border border-gray-200">
+    <div className="p-8 transition transform hover:scale-110 duration-500 border border-primary/20 
+             shadow-2xl shadow-green-500/60 hover:shadow-2xl hover:shadow-green-500/90 rounded-2xl">
         <FaQuoteLeft className="text-3xl text-primary mb-4" />
         <p className="italic text-gray-700 mb-4">"{quote}"</p>
         <div className="font-bold text-gray-800">{name}</div>
@@ -19,7 +20,7 @@ const TestimonialCard = ({ quote, name, car }) => (
 const Testimonials = () => {
     return (
         <section className="bg-white py-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-center text-green-500 mb-12">
                 What Our Customers Say
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

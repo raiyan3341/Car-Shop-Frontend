@@ -84,13 +84,13 @@ const MyBookings = () => {
             <Helmet>
                 <title>My Bookings - Car Rental</title>
             </Helmet>
-            <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-10">
+            <h1 className="text-3xl font-extrabold text-green-500 text-center mb-10">
                 My Booked Cars ({bookings.length})
             </h1>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {bookings.map(booking => (
-                    <div key={booking._id} className="card bg-white shadow-lg border border-primary/10 transition duration-300 hover:shadow-xl">
+                    <div key={booking._id} className="card bg-white shadow-2xl shadow-blue-600/90 border border-primary/10 transition duration-300 hover:shadow-xl">
                         <figure>
                             <img 
                                 src={booking.carDetails?.hostedImageURL || 'https://via.placeholder.com/600x400?text=Car+Image'} 

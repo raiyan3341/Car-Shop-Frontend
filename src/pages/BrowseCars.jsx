@@ -35,7 +35,7 @@ const BrowseCars = () => {
 
     return (
         <div className="container mx-auto px-4 py-12">
-            <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-10">Browse All Cars ({cars.length})</h1>
+            <h1 className="text-3xl font-extrabold text-green-500 text-center mt-5 mb-20">Browse All Cars ({cars.length})</h1>
 
             {cars.length === 0 ? (
                 <div className="text-center p-10 border rounded-xl bg-gray-50">

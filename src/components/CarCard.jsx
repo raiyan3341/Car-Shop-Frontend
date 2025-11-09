@@ -11,7 +11,8 @@ const CarCard = ({ car }) => {
     const statusText = isAvailable ? 'Available' : 'Booked';
 
     return (
-        <div className="card w-full bg-base-100 shadow-xl transition transform hover:scale-[1.02]">
+        <div className="card w-full bg-base-100 transition transform hover:scale-112 duration-500 border border-primary/20 
+             shadow-2xl shadow-blue-600/60 hover:shadow-2xl hover:shadow-blue-600/100">
             <figure className="relative h-60">
                 <img src={hostedImageURL} alt={carName} className="object-cover w-full h-full" />
                 
@@ -45,6 +46,7 @@ const CarCard = ({ car }) => {
                 </div>
             </div>
         </div>
+        
     );
 };
 

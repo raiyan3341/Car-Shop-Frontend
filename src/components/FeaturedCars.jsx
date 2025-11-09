@@ -5,7 +5,7 @@ import CarCard from './CarCard';
 const FeaturedCars = ({ cars, searchQuery }) => {
     return (
         <section>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-10">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-center text-green-500 mb-10">
                 {searchQuery ? `Search Results for "${searchQuery}"` : "Featured Cars"}
             </h2>
             <p className="text-center text-gray-500 mb-10">

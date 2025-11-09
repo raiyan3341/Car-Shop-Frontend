@@ -98,7 +98,7 @@ const MyListings = () => {
 
     return (
         <div className="container mx-auto px-4 py-12">
-            <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-10">My Car Listings</h1>
+            <h1 className="text-3xl font-extrabold text-green-500 text-center mb-10">My Car Listings</h1>
 
             {listings.length === 0 ? (
                 <div className="text-center p-10 border rounded-xl bg-gray-50">
@@ -106,7 +106,7 @@ const MyListings = () => {
                     <button onClick={() => navigate('/add-car')} className="btn btn-primary">Add Your First Car</button>
                 </div>
             ) : (
-                <div className="overflow-x-auto shadow-xl rounded-lg">
+                <div className="overflow-x-auto shadow-2xl shadow-blue-600/60 rounded-lg">
                     <table className="table w-full">
                         {/* head */}
                         <thead className="bg-gray-200 text-gray-700">

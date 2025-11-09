@@ -89,7 +89,7 @@ const CarDetails = () => {
 
     return (
         <div className="container mx-auto px-4 py-12">
-            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden">
+            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl shadow-blue-600/90 overflow-hidden">
                 <div className="relative h-96">
                     <img src={car.hostedImageURL} alt={car.carName} className="w-full h-full object-cover" />
                     

@@ -1,5 +1,8 @@
+// Home.jsx
+
 import React, { useState, useEffect } from 'react';
- // Will be created next
+import { Link } from 'react-router-dom'; // ✅ Link ইম্পোর্ট করা হলো
+// Will be created next
 import FeaturedCars from '../components/FeaturedCars'; // Will be created next
 import WhyUs from '../components/WhyUs'; // Will be created next
 import Testimonials from '../components/Testimonials'; // Will be created next
@@ -51,6 +54,22 @@ const Home = () => {
                 {/* 2. Featured Cars Section */}
                 <FeaturedCars cars={cars} loading={loading} searchQuery={searchQuery} />
 
+                {/* ✅ Show More বাটন: Featured Cars এর নিচে যুক্ত করা হলো */}
+                {/* এই বাটনটি শুধু তখনই দেখাবে যখন কোনো সার্চ রেজাল্ট দেখানো হবে না (optional condition) 
+                    অথবা যখন গাড়ির সংখ্যা 6 এর বেশি হবে (if you implement that check) 
+                    তবে সরলতার জন্য, এটিকে সবসময় দেখানো হলো।
+                */}
+                {!searchQuery && (
+                    <div className="text-center mt-12">
+                        <Link 
+                            to="/browse" // আপনার Browse Cars পেজের রুট
+                            className="btn btn-primary hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-xl transition duration-300"
+                        >
+                            Show More Cars
+                        </Link>
+                    </div>
+                )}
+                
                 {/* 3. Why Rent With Us section (static) */}
                 <WhyUs />
                 

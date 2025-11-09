@@ -12,8 +12,8 @@ const BookingConfirmationModal = ({ isOpen, onClose, onConfirm, car }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[110]">
-            <div className="bg-white p-8 rounded-xl w-full max-w-md mx-4 shadow-2xl text-center">
+        <div className="fixed inset-0 bg-opacity-70 flex justify-center items-center z-[110] ">
+            <div className="bg-white p-8 rounded-xl w-full max-w-md mx-4 shadow-2xl shadow-green-600/90 text-center">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Confirm Your Booking</h2>
                 
                 {/* Lottie Animation (Optional Requirement) */}

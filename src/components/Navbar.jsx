@@ -45,11 +45,11 @@ const Navbar = () => {
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 gap-3.5 p-2 shadow-2xl shadow-blue-600/90 bg-base-100 rounded-box w-52 h-60">
                             {navLinks}
                         </ul>
                     </div>
-                    <Link to="/" className="btn btn-ghost text-xl font-bold text-primary">
+                    <Link to="/" className="text-xl font-bold text-primary">
                         🚗 CarRentalsPro
                     </Link>
                 </div>
@@ -75,7 +75,7 @@ const Navbar = () => {
                             />
                             {/* Dropdown Menu (Requirement) */}
                             {isDropdownOpen && (
-                                <ul className="absolute right-0 mt-3 w-52 p-2 shadow bg-base-100 rounded-box z-50 text-sm">
+                                <ul className="absolute right-0 mt-3 w-80 h-40 p-2 shadow-2xl shadow-blue-600/90 bg-base-100 rounded-box z-50 text-sm">
                                     <li className="p-2 font-bold">{user.displayName || 'User'}</li>
                                     <li className="p-2 text-gray-500 break-all">{user.email}</li>
                                     <div className="divider my-1"></div>
