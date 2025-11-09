@@ -9,7 +9,7 @@ const Root = () => {
     const location = useLocation();
 
     useEffect(() => {
-        // যখনই location.pathname (URL পাথ) পরিবর্তন হবে, তখনই এটি টপে স্ক্রল করবে
+       
         window.scrollTo(0, 0); 
     }, [location.pathname]);
     // Condition to hide Navbar/Footer on 404/Error page (Requirement)

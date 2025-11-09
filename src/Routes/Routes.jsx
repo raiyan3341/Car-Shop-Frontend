@@ -16,11 +16,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <ErrorPage />, // Navbar/Footer will be absent here (Requirement)
+    errorElement: <ErrorPage />, 
     children: [
       {
         path: "/",
-        element: <Home />, // Home Page Requirements
+        element: <Home />, 
       },
       {
         path: "/browse",
