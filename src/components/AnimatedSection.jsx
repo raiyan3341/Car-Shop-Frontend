@@ -1,19 +1,7 @@
-// src/components/AnimatedSection.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-/**
- * 💫 AnimatedSection Component (Upgraded)
- * Smoothly animates its children into view with direction control, spring motion, and reusable props.
- *
- * Props:
- * - direction: 'up' | 'down' | 'left' | 'right' (default: 'up')
- * - duration: animation duration (default: 0.8s)
- * - delay: animation start delay
- * - once: if true, plays animation only once when it first comes into view
- * - scale: enable subtle zoom-in effect (default: true)
- */
 const AnimatedSection = ({
   children,
   direction = 'up',
@@ -24,10 +12,10 @@ const AnimatedSection = ({
 }) => {
   const { ref, inView } = useInView({
     triggerOnce: once,
-    threshold: 0.2, // 20% visible → start animation
+    threshold: 0.2,
   });
 
-  // Direction-based movement
+
   const directionVariants = {
     up: { y: 60, x: 0 },
     down: { y: -60, x: 0 },
@@ -35,7 +23,6 @@ const AnimatedSection = ({
     right: { x: -80, y: 0 },
   };
 
-  // Animation variants
   const variants = {
     hidden: {
       opacity: 0,
@@ -50,7 +37,7 @@ const AnimatedSection = ({
       transition: {
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1], // cubic-bezier for smooth easing
+        ease: [0.25, 0.1, 0.25, 1],
         type: 'spring',
         stiffness: 60,
         damping: 20,
