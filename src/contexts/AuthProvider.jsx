@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // <-- সরাসরি axios ইম্পোর্ট করুন
+import axios from 'axios';
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
@@ -15,15 +15,10 @@ import toast from 'react-hot-toast';
 
 
 const googleProvider = new GoogleAuthProvider();
-const API_BASE_URL = 'http://localhost:3011'; // <-- আপনার ব্যাকএন্ড URL নিশ্চিত করুন
-
+const API_BASE_URL = 'http://localhost:3011';
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); 
     const [loading, setLoading] = useState(true);
-
-    // ------------------------------------------
-    // Authentication Functions
-    // ------------------------------------------
     const createUser = (email, password, name, photoURL) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
@@ -58,23 +53,14 @@ const AuthProvider = ({ children }) => {
         return null;
     };
 
-
-    // ------------------------------------------
-    // User State Observer & Token Exchange (Fix Applied Here)
-    // ------------------------------------------
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            
-            // JWT Token Exchange Logic
             if (currentUser) {
                 currentUser.getIdToken()
                     .then(idToken => {
-                        // Use direct axios call here
                         axios.post(`${API_BASE_URL}/auth/jwt`, { idToken }, { withCredentials: true })
                             .then(res => {
-                                // console.log("JWT token exchanged successfully.");
                                 setLoading(false);
                             })
                             .catch(error => {
@@ -82,11 +68,10 @@ const AuthProvider = ({ children }) => {
                                 setLoading(false);
                             });
                     });
-            } else {
-                // Logout: Clear cookie/token on the server
+            } 
+            else {
                 axios.post(`${API_BASE_URL}/auth/logout`, {}, { withCredentials: true })
                     .then(() => {
-                        // console.log("Logout successful, client token cleared.");
                         setLoading(false);
                     })
                     .catch(error => {
@@ -101,12 +86,7 @@ const AuthProvider = ({ children }) => {
         });
         
         return () => unsubscribe();
-    }, []); // Empty dependency array as API_BASE_URL is a constant
-    
-    
-    // ------------------------------------------
-    // Context Value
-    // ------------------------------------------
+    }, []);
     
     const authInfo = {
         user,
