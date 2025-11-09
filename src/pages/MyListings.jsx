@@ -129,7 +129,7 @@ const MyListings = () => {
                                             {car.status}
                                         </span>
                                     </td>
-                                    <td className="space-x-2">
+                                    <td className="space-x-2 flex">
                                         <button onClick={() => handleUpdate(car)} className="btn btn-sm btn-info text-white">
                                             Update
                                         </button>

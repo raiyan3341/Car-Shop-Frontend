@@ -37,7 +37,7 @@ const Navbar = () => {
     };
 
     return (
-        <header className="shadow-md bg-white sticky top-0 z-50">
+        <header className="shadow-lg shadow-blue-400 bg-white sticky top-0 z-50">
             <div className="navbar container mx-auto px-4">
                 {/* Mobile Menu / Logo */}
                 <div className="navbar-start">
@@ -67,12 +67,15 @@ const Navbar = () => {
                         <span className="loading loading-spinner loading-sm"></span>
                     ) : user ? (
                         <div className="relative">
-                            <img
+                            <div className=''>
+                                <img
                                 src={user.photoURL || 'default_profile.png'} 
                                 alt={user.displayName || 'User'}
                                 className="w-10 h-10 rounded-full cursor-pointer border-2 border-primary object-cover"
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             />
+                            </div>
+                            
                             {/* Dropdown Menu (Requirement) */}
                             {isDropdownOpen && (
                                 <ul className="absolute right-0 mt-3 w-80 h-40 p-2 shadow-2xl shadow-blue-600/90 bg-base-100 rounded-box z-50 text-sm">

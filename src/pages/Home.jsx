@@ -1,20 +1,21 @@
 // Home.jsx
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // ✅ Link ইম্পোর্ট করা হলো
+import { Link } from 'react-router-dom';
 // Will be created next
-import FeaturedCars from '../components/FeaturedCars'; // Will be created next
-import WhyUs from '../components/WhyUs'; // Will be created next
-import Testimonials from '../components/Testimonials'; // Will be created next
+import FeaturedCars from '../components/FeaturedCars';
+import WhyUs from '../components/WhyUs';
+import Testimonials from '../components/Testimonials';
 import useAxios from '../hooks/useAxios';
 import { ScaleLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
 import Hero from '../components/Hero';
+import AnimatedSection from '../components/AnimatedSection'; // ✅ ইম্পোর্ট করা আছে
 
 const Home = () => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState(''); // State for search (Challenge)
+    const [searchQuery, setSearchQuery] = useState('');
     const axiosSecure = useAxios();
 
     // Fetch 6 newest cars (Featured Cars Requirement)
@@ -48,33 +49,41 @@ const Home = () => {
 
     return (
         <div>
-            <Hero setSearchQuery={setSearchQuery} /> {/* Pass search state to Hero (for input) */}
-            
+            <AnimatedSection>
+            {/* Hero Section টিকে সাধারণত অ্যানিমেট করার দরকার হয় না, কারণ এটি প্রথমে স্ক্রিনে থাকে */}
+            <Hero setSearchQuery={setSearchQuery} /> 
+            </AnimatedSection>
             <div className="container mx-auto px-4 py-12 space-y-20">
+                
                 {/* 2. Featured Cars Section */}
-                <FeaturedCars cars={cars} loading={loading} searchQuery={searchQuery} />
+                {/* এটি প্রথম অ্যানিমেটেড সেকশন, তাই delay 0.1s */}
+                <AnimatedSection delay={0.1}> 
+                    <FeaturedCars cars={cars} loading={loading} searchQuery={searchQuery} />
+                </AnimatedSection>
 
-                {/* ✅ Show More বাটন: Featured Cars এর নিচে যুক্ত করা হলো */}
-                {/* এই বাটনটি শুধু তখনই দেখাবে যখন কোনো সার্চ রেজাল্ট দেখানো হবে না (optional condition) 
-                    অথবা যখন গাড়ির সংখ্যা 6 এর বেশি হবে (if you implement that check) 
-                    তবে সরলতার জন্য, এটিকে সবসময় দেখানো হলো।
-                */}
+                {/* ✅ Show More বাটন: এটিকেও একটি অ্যানিমেশন সেকশনের মধ্যে রাখুন */}
                 {!searchQuery && (
-                    <div className="text-center mt-12">
-                        <Link 
-                            to="/browse" // আপনার Browse Cars পেজের রুট
-                            className="btn btn-primary hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-xl transition duration-300"
-                        >
-                            Show More Cars
-                        </Link>
-                    </div>
+                    <AnimatedSection delay={0.2}>
+                        <div className="text-center mt-12">
+                            <Link 
+                                to="/browse" // আপনার Browse Cars পেজের রুট
+                                className="btn btn-primary hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-xl transition duration-300"
+                            >
+                                Show More Cars
+                            </Link>
+                        </div>
+                    </AnimatedSection>
                 )}
                 
                 {/* 3. Why Rent With Us section (static) */}
-                <WhyUs />
+                <AnimatedSection delay={0.3}>
+                    <WhyUs />
+                </AnimatedSection>
                 
                 {/* 4. Extra Sections (2) */}
-                <Testimonials />
+                <AnimatedSection delay={0.4}>
+                    <Testimonials />
+                </AnimatedSection>
                 {/* Example of another section (e.g., Top Rated) */}
                 {/* <TopRatedCars /> */} 
                 

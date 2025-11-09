@@ -102,7 +102,7 @@ const AddCar = ({ isUpdate = false }) => {
     return (
         <div className="container mx-auto px-4 py-12">
             <h1 className="text-3xl font-extrabold text-green-500 text-center mb-10">{pageTitle}</h1>
-            
+
             <form onSubmit={handleSubmit} className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-2xl shadow-blue-600/90 ">
                 
                 {/* Provider Info (Read-only Requirement) */}
