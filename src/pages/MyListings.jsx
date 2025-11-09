@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAxios from '../hooks/useAxios';
 import toast from 'react-hot-toast';
-import Swal from 'sweetalert2'; // SweetAlert Requirement
+import Swal from 'sweetalert2';
 import { ScaleLoader } from 'react-spinners';
-import UpdateCarModal from '../pages/UpdateCarModal'; // Will be created next
+import UpdateCarModal from '../pages/UpdateCarModal';
 
 const MyListings = () => {
     const [listings, setListings] = useState([]);
@@ -13,8 +13,6 @@ const MyListings = () => {
     const [carToUpdate, setCarToUpdate] = useState(null);
     const axiosSecure = useAxios();
     const navigate = useNavigate();
-
-    // --- 1. Fetch My Listings ---
     const fetchListings = () => {
         setLoading(true);
         axiosSecure.get('/my-listings')
@@ -32,10 +30,9 @@ const MyListings = () => {
 
     useEffect(() => {
         fetchListings();
-    }, [axiosSecure]);
+    }, 
+    [axiosSecure]);
 
-
-    // --- 2. Delete Operation (Requirement: Confirmation, DB Removal, UI Update) ---
     const handleDelete = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -49,15 +46,15 @@ const MyListings = () => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/cars/${id}`)
                     .then(res => {
-                        if (res.data.deletedCount > 0) {
+                        if (res.data.deletedCount > 0){
                             Swal.fire(
                                 'Deleted!',
                                 'Your car listing has been deleted.',
                                 'success'
                             );
-                            // Instantly update UI (Requirement)
                             setListings(listings.filter(car => car._id !== id));
-                        } else {
+                        } 
+                        else {
                             toast.error("Deletion failed. Not authorized or car not found.");
                         }
                     })
@@ -69,19 +66,16 @@ const MyListings = () => {
         });
     };
     
-    // --- 3. Update Operation (Using Modal - Optional Requirement) ---
     const handleUpdate = (car) => {
         setCarToUpdate(car);
         setIsModalOpen(true);
     };
     
-    // Function to close modal and potentially re-fetch data
     const closeModalAndRefresh = (updatedCar = null) => {
         setIsModalOpen(false);
         setCarToUpdate(null);
         
         if (updatedCar) {
-            // Optimistically update UI
             setListings(listings.map(car => 
                 car._id === updatedCar._id ? updatedCar : car
             ));
@@ -108,7 +102,6 @@ const MyListings = () => {
             ) : (
                 <div className="overflow-x-auto shadow-2xl shadow-blue-600/60 rounded-lg">
                     <table className="table w-full">
-                        {/* head */}
                         <thead className="bg-gray-200 text-gray-700">
                             <tr>
                                 <th>Car Name</th>
@@ -123,19 +116,13 @@ const MyListings = () => {
                                 <tr key={car._id}>
                                     <td className="font-semibold">{car.carName}</td>
                                     <td>{car.category}</td>
-                                    <td>৳{car.rentPrice}/day</td>
+                                    <td>${car.rentPrice}/day</td>
                                     <td>
-                                        <span className={`badge ${car.status === 'Available' ? 'badge-success' : 'badge-error'} text-white`}>
-                                            {car.status}
-                                        </span>
+                                        <span className={`badge ${car.status === 'Available' ? 'badge-success' : 'badge-error'} text-white`}>{car.status}</span>
                                     </td>
                                     <td className="space-x-2 flex">
-                                        <button onClick={() => handleUpdate(car)} className="btn btn-sm btn-info text-white">
-                                            Update
-                                        </button>
-                                        <button onClick={() => handleDelete(car._id)} className="btn btn-sm btn-error text-white">
-                                            Delete
-                                        </button>
+                                        <button onClick={() => handleUpdate(car)} className="btn btn-sm btn-info text-white">Update</button>
+                                        <button onClick={() => handleDelete(car._id)} className="btn btn-sm btn-error text-white"> Delete </button>
                                     </td>
                                 </tr>
                             ))}
@@ -143,14 +130,11 @@ const MyListings = () => {
                     </table>
                 </div>
             )}
-            
-            {/* Update Modal */}
             {carToUpdate && (
                 <UpdateCarModal 
                     isOpen={isModalOpen} 
                     onClose={closeModalAndRefresh} 
-                    car={carToUpdate}
-                />
+                    car={carToUpdate}/>
             )}
         </div>
     );
