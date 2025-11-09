@@ -1,16 +1,67 @@
-# React + Vite
+# 🚗 Car Rental Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-stack **Car Rental Web Application** frontend built with **React**, featuring JWT authentication, smooth scroll animations, a dark theme interface, and full CRUD functionality.  
 
-Currently, two official plugins are available:
+This project focuses on user experience, secure authentication, and clean design — making car management and booking seamless.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🛡️ **JWT & Firebase Auth**  
+  Secure authentication with **Google Login** and **JWT-based cookie sessions** for protected routes.
 
-## Expanding the ESLint configuration
+- 🎨 **Premium Dark Theme**  
+  A professional **dark gradient UI** with elegant **blue accent shadows** across all components.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 💫 **Smooth Scroll Animations**  
+  Implemented **fade-in and motion effects** using **Framer Motion** and **React Intersection Observer** for engaging transitions.
+
+- ⚙️ **Complete CRUD Functionality**  
+  Users can **add**, **view**, **update (PATCH)**, and **delete** their car listings in real time.
+
+- 🔍 **Quick Search**  
+  Dynamic search bar in the Hero section to instantly filter cars by name.
+
+- 📅 **Booking & Cancellation**  
+  Users can **book** and **cancel** car rentals — automatically updating availability status in the backend.
+
+- ⬆️ **Scroll-to-Top Feature**  
+  Automatically scrolls the view to the top upon navigation for a smooth UX.
+
+---
+
+## 💻 Tech Stack
+
+| Category | Technologies Used |
+|-----------|-------------------|
+| **Frontend Framework** | React |
+| **Routing** | React Router DOM |
+| **Styling** | Tailwind CSS |
+| **API Client** | Axios (with Secure Interceptors) |
+| **Animation** | Framer Motion, React Intersection Observer |
+| **Authentication** | Firebase Authentication (Google Provider) |
+| **State Management** | React Context API + Local State |
+
+---
+
+## ⚙️ Installation & Setup
+
+Follow these steps to run the project locally:
+
+### 🧩 Prerequisites
+- Node.js (LTS version recommended)  
+- npm or yarn  
+- Backend server running (Node + Express + MongoDB)
+
+---
+- The app will typically be available at:
+- 👉 http://localhost:5173
+
+
+## 👤 Developer
+
+- [MD RAYAN BIN RAFIN]
+-🔗 GitHub Profile : 
+
+-💼 LinkedIn Profile : 
