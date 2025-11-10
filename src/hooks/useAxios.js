@@ -1,7 +1,7 @@
 import axios from "axios";
 import useAuth from "./useAuth";
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:3011',
+    baseURL: 'https://car-shop-backend-navy.vercel.app',
     withCredentials: true,
 });
 const useAxios = () => {

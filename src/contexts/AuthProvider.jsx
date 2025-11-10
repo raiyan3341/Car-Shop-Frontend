@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 
 
 const googleProvider = new GoogleAuthProvider();
-const API_BASE_URL = 'http://localhost:3011';
+const API_BASE_URL = 'https://car-shop-backend-navy.vercel.app';
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); 
     const [loading, setLoading] = useState(true);

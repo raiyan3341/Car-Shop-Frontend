@@ -39,7 +39,7 @@ const AnimatedSection = ({
         delay,
         ease: [0.25, 0.1, 0.25, 1],
         type: 'spring',
-        stiffness: 60,
+        stiffness: 70,
         damping: 20,
       },
     },
