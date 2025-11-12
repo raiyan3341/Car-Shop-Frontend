@@ -56,7 +56,7 @@ Follow these steps to run the project locally:
 
 ---
 - The app will typically be available at:
-- 👉 http://localhost:5173
+- 👉 (https://assignment-10-bb401.web.app/)
 
 
 ## 👤 Developer
